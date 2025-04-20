@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function IntroScreen() {
     
     return (
@@ -8,6 +10,15 @@ function IntroScreen() {
         <p className="text-lg font-sans text-indigo-200 max-w-xl">
           DreamMatch is built to help you find meaningful connections — not just likes.
         </p>
+
+        <div className="mt-8 space-x-4">
+            <Link to="/signup" className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded">
+              Sign Up
+            </Link>
+            <Link to="/login" className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded">
+              Login
+            </Link>
+        </div>
       </div>
     );
 }
