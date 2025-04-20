@@ -1,5 +1,5 @@
 function Home() {
-    return <h1 className="text-white text-3xl">Home Page</h1>
+  return <h1 className="text-white text-3xl">Home Page</h1>
 }
 
-export default Home  
+export default Home
