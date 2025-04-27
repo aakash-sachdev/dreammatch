@@ -2,6 +2,8 @@ import { useState } from 'react'
 import InputField from '../components/InputField'
 import { useNavigate } from 'react-router-dom'
 import { validateSignupForm } from '../utils/validators'
+import { toast } from 'react-hot-toast'
+
 
 function Signup() {
   const [name, setName] = useState('')
@@ -31,7 +33,7 @@ function Signup() {
     }
 
 
-    alert('Signup successful! 🎉')
+    toast.success('Signup successful! 🎉')
     navigate('/')
 
   }
