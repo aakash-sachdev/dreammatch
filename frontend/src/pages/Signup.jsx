@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { validateSignupForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
 
-
 function Signup() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -25,17 +24,15 @@ function Signup() {
     e.preventDefault()
     console.log('Form Submitted:', { name, email, password })
 
-    const validationErrors = validateSignupForm({name, email, password})
+    const validationErrors = validateSignupForm({ name, email, password })
 
-    if (Object.keys(validationErrors).length > 0){
-        setErrors(validationErrors)
-        return
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors)
+      return
     }
-
 
     toast.success('Signup successful! 🎉')
     navigate('/')
-
   }
 
   return (
@@ -54,7 +51,7 @@ function Signup() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p> }
+        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
 
         <InputField
           label="Email"
@@ -77,7 +74,9 @@ function Signup() {
           }}
           required
         />
-        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+        {errors.password && (
+          <p className="text-red-500 text-sm">{errors.password}</p>
+        )}
 
         {password && (
           <p
