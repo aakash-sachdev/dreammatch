@@ -1,0 +1,18 @@
+export function validateSignupForm({name, email, password}){
+    const errors = {}
+
+    if (!name.trim()) {
+        errors.name = "Name is required"
+    }
+    if (!email.trim()) {
+        errors.email = "Email is required"
+    } else if (!email.includes('@') || !email.includes('.')){
+        errors.email = "Email is required"
+    }
+
+    if (password.length < 8) {
+        errors.password = "Password must be at least 8 characters"
+    }
+
+    return errors
+}

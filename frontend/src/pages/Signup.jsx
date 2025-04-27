@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import InputField from '../components/InputField'
 import { useNavigate } from 'react-router-dom'
+import { validateSignupForm } from '../utils/validators'
 
 function Signup() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordStrength, setPasswordStrength] = useState('')
+  const [errors, setErrors] = useState({})
 
   const navigate = useNavigate()
 
@@ -21,16 +23,17 @@ function Signup() {
     e.preventDefault()
     console.log('Form Submitted:', { name, email, password })
 
-    function isPasswordStrong(pwd) {
-      return pwd.length >= 8 && /[A-Z]/.test(pwd) && /[0-9]/.test(pwd)
+    const validationErrors = validateSignupForm({name, email, password})
+
+    if (Object.keys(validationErrors).length > 0){
+        setErrors(validationErrors)
+        return
     }
 
-    if (name && email && isPasswordStrong(password)) {
-      alert('Signup successful! 🎉')
-      navigate('/')
-    } else {
-      alert('Please fill out all fields correctly.')
-    }
+
+    alert('Signup successful! 🎉')
+    navigate('/')
+
   }
 
   return (
@@ -49,6 +52,7 @@ function Signup() {
           onChange={(e) => setName(e.target.value)}
           required
         />
+        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p> }
 
         <InputField
           label="Email"
@@ -58,6 +62,7 @@ function Signup() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
 
         <InputField
           label="Password"
@@ -70,6 +75,7 @@ function Signup() {
           }}
           required
         />
+        {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
 
         {password && (
           <p
