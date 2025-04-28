@@ -32,7 +32,7 @@ function Signup() {
     }
 
     toast.success('Signup successful! 🎉')
-    navigate('/')
+    navigate('/home')
   }
 
   return (

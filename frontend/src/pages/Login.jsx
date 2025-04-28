@@ -22,7 +22,7 @@ function Login() {
     }
 
     toast.success('Login successful! 🎉')
-    navigate('/')
+    navigate('/home')
   }
 
   return (
