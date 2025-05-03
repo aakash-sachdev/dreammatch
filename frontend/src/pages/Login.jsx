@@ -3,12 +3,13 @@ import InputField from '../components/InputField'
 import { useNavigate } from 'react-router-dom'
 import { validateLoginForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
+import { useAuth } from '../context/AuthContext'
 
 function Login() {
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
-
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
@@ -21,6 +22,7 @@ function Login() {
       return
     }
 
+    login()
     toast.success('Login successful! 🎉')
     navigate('/home')
   }
