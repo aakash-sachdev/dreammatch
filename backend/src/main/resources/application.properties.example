@@ -1,0 +1,10 @@
+# Copy application.properties.example → application.properties and fill in DB credentials
+# MySQL DB Config
+spring.datasource.url=jdbc:mysql://localhost:3306/dreammatch
+spring.datasource.username=YOUR_USERNAME_HERE
+spring.datasource.password=YOUR_PASSWORD_HERE
+
+# JPA (Hibernate) Config
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
