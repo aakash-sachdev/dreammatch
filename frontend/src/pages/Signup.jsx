@@ -3,6 +3,7 @@ import InputField from '../components/InputField'
 import { useNavigate } from 'react-router-dom'
 import { validateSignupForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
+import { signupUser } from '../services/api'
 
 function Signup() {
   const [name, setName] = useState('')
@@ -20,7 +21,7 @@ function Signup() {
     return 'Medium'
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     console.log('Form Submitted:', { name, email, password })
 
@@ -31,8 +32,13 @@ function Signup() {
       return
     }
 
-    toast.success('Signup successful! 🎉')
-    navigate('/home')
+    try {
+      const response = await signupUser({ name, email, password })
+      toast.success(response.data)
+      navigate('/home')
+    } catch (error) {
+      toast.error(error.response?.data || 'Singup Failed')
+    }
   }
 
   return (

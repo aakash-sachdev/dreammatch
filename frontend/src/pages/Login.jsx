@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { validateLoginForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
+import { loginUser } from '../services/api'
 
 function Login() {
   const { login } = useAuth()
@@ -12,7 +13,7 @@ function Login() {
   const [errors, setErrors] = useState({})
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const validationErrors = validateLoginForm({ email, password })
@@ -22,9 +23,14 @@ function Login() {
       return
     }
 
-    login()
-    toast.success('Login successful! 🎉')
-    navigate('/home')
+    try {
+      const response = await loginUser({ email, password })
+      login()
+      toast.success(response.data)
+      navigate('/home')
+    } catch (error) {
+      toast.error(error.response?.data || 'Login failed')
+    }
   }
 
   return (
