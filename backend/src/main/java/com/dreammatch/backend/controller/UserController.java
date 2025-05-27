@@ -29,11 +29,12 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestBody User user){
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser.isEmpty()){
-            return "Email not found";
-        } if(!existingUser.get().getPassword().equals(user.getPassword())){
-            return "Invalid password";
+
+        if (existingUser.isEmpty() ||
+                !existingUser.get().getPassword().equals(user.getPassword())) {
+            return "Invalid credentials";
         }
+
         return "Login successful";
     }
 }
