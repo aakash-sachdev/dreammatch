@@ -3,6 +3,9 @@ package com.dreammatch.backend.controller;
 import com.dreammatch.backend.model.User;
 import com.dreammatch.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -27,14 +30,14 @@ public class UserController {
 
     // Login endpoint
     @PostMapping("/login")
-    public String login(@RequestBody User user){
+    public ResponseEntity<String> login(@RequestBody User user){
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser.isEmpty() ||
                 !existingUser.get().getPassword().equals(user.getPassword())) {
-            return "Invalid credentials";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
 
-        return "Login successful";
+        return ResponseEntity.ok("Login successful");
     }
 }
