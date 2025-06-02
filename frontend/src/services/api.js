@@ -9,3 +9,5 @@ const API = axios.create({
 
 export const signupUser = (userData) => API.post('signup', userData)
 export const loginUser = (userData) => API.post('login', userData)
+export const getUserProfile = (email) =>
+  API.get('profile', { params: { email } })
