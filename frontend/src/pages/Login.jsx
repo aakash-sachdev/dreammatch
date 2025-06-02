@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import InputField from '../components/InputField'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { validateLoginForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
@@ -70,6 +70,16 @@ function Login() {
         >
           Login
         </button>
+
+        <p className="text-sm text-center text-gray-300 mt-4">
+          Don't have an account?{' '}
+          <Link
+            to="/signup"
+            className="text-indigo-400 hover:underline hover:text-indigo-300 transition duration-200"
+          >
+            Sign up
+          </Link>
+        </p>
       </form>
     </div>
   )
