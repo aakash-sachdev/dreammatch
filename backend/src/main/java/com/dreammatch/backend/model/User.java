@@ -21,6 +21,9 @@ public class User {
 
     private LocalDate createdAt = LocalDate.now();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserProfile profile;
+
     public User() {}
 
     public User(String name, String email, String password){
