@@ -38,7 +38,7 @@ public class UserController {
 
     // Login endpoint
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
+    public ResponseEntity<?> login(@RequestBody User user){
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser.isEmpty()) {
@@ -54,6 +54,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
 
-        return ResponseEntity.ok("Login successful");
+        return ResponseEntity.ok(existingUser.get());
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<?> getProfile(@RequestParam String email){
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if(user.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+
+        return ResponseEntity.ok(user.get());
     }
 }
