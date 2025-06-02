@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import InputField from '../components/InputField'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { validateSignupForm } from '../utils/validators'
 import { toast } from 'react-hot-toast'
 import { signupUser } from '../services/api'
@@ -104,6 +104,16 @@ function Signup() {
         >
           Create Account
         </button>
+
+        <p className="text-sm text-center text-gray-300 mt-4">
+          Already have an account?{' '}
+          <Link
+            to="/login"
+            className="text-indigo-400 hover:underline hover:text-indigo-300 transition duration-200"
+          >
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   )
