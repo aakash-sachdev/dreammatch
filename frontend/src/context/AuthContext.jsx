@@ -3,19 +3,33 @@ import { createContext, useContext, useEffect, useState } from 'react'
 const AuthContext = createContext()
 
 export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    return localStorage.getItem('isLoggedIn') === 'true' // lazy initializer
+  const [user, setUser] = useState(() => {
+    // lazy initializer
+    try {
+      const savedUser = localStorage.getItem('user')
+
+      if (!savedUser || savedUser === 'undefined') return null
+
+      return JSON.parse(savedUser)
+    } catch (error) {
+      console.error('Invalid user data in localStorage', error)
+      return null
+    }
   })
 
   useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn)
-  }, [isLoggedIn])
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user))
+    } else {
+      localStorage.removeItem('user')
+    }
+  }, [user])
 
-  const login = () => setIsLoggedIn(true)
-  const logout = () => setIsLoggedIn(false)
+  const login = (userData) => setUser(userData)
+  const logout = () => setUser(null)
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ user, isLoggedIn: !!user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

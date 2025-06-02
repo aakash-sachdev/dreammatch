@@ -17,6 +17,7 @@ function App() {
         element={
           <ProtectedRoute>
             <Home />
+            <Profile />
           </ProtectedRoute>
         }
       />

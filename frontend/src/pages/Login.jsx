@@ -25,8 +25,9 @@ function Login() {
 
     try {
       const response = await loginUser({ email, password })
-      login()
-      toast.success(response.data)
+      const { name, email: safeEmail } = response.data
+      login({ name, email: safeEmail })
+      toast.success('Login Successful !')
       navigate('/home')
     } catch (error) {
       toast.error(error.response?.data || 'Login failed')
