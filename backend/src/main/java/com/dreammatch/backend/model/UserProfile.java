@@ -19,7 +19,8 @@ public class UserProfile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public UserProfile() {}
+    public UserProfile() {
+    }
 
     public UserProfile(Long id, String name, String gender, String bio, String preferences, String profileImageUrl, User user) {
         this.id = id;
