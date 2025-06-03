@@ -17,13 +17,13 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(auth -> auth
                 .requestMatchers("/signup", "/login", "/api/signup", "/api/login", "/api/profile").permitAll()
                 .anyRequest().authenticated()
-              );
+        );
 
         return http.build();
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 

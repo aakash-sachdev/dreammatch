@@ -23,13 +23,13 @@ public class UserController {
 
     // Signup endpoint
     @PostMapping("/signup")
-    public String signup(@RequestBody User user){
+    public String signup(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-        if(existingUser.isPresent()){
+        if (existingUser.isPresent()) {
             return "Email already exists";
         }
 
-       String hashedPassword = passwordEncoder.encode(user.getPassword());
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
 
         userRepository.save(user);
@@ -38,7 +38,7 @@ public class UserController {
 
     // Login endpoint
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user){
+    public ResponseEntity<?> login(@RequestBody User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 
         if (existingUser.isEmpty()) {
@@ -50,7 +50,7 @@ public class UserController {
                 existingUser.get().getPassword()
         );
 
-        if(!passwordMatch){
+        if (!passwordMatch) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
 
@@ -58,10 +58,10 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public ResponseEntity<?> getProfile(@RequestParam String email){
+    public ResponseEntity<?> getProfile(@RequestParam String email) {
         Optional<User> user = userRepository.findByEmail(email);
 
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
 
