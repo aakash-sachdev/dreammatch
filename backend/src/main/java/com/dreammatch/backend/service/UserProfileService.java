@@ -19,6 +19,6 @@ public class UserProfileService {
     }
 
     public Optional<UserProfile> getProfileByUser(User user) {
-        return UserProfileRepository.findByUser(user);
+        return userProfileRepository.findByUser(user);
     }
 }
