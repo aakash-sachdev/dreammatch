@@ -40,6 +40,10 @@ public class UserProfile {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public String getPreferences() {
         return preferences;
     }
