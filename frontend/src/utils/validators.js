@@ -7,7 +7,7 @@ export function validateSignupForm({ name, email, password }) {
   if (!email.trim()) {
     errors.email = 'Email is required'
   } else if (!email.includes('@') || !email.includes('.')) {
-    errors.email = 'Email is required'
+    errors.email = 'Invalid email address'
   }
 
   if (password.length < 8) {
@@ -23,7 +23,7 @@ export function validateLoginForm({ email, password }) {
   if (!email.trim()) {
     errors.email = 'Email is required'
   } else if (!email.includes('@') || !email.includes('.')) {
-    errors.email = 'Email is required'
+    errors.email = 'Invalid email address'
   }
 
   if (password.length < 8) {
