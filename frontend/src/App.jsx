@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import ProtectedRoute from './components/ProtectedRoute'
+import Onboarding from './pages/Onboarding'
 
 function App() {
   return (
@@ -25,6 +26,15 @@ function App() {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/onboarding"
+        element={
+          <ProtectedRoute>
+            {' '}
+            <Onboarding />
           </ProtectedRoute>
         }
       />
