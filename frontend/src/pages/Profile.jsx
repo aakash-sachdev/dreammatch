@@ -1,6 +1,5 @@
 import Navbar from '../components/Navbar'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { getUserProfile } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 

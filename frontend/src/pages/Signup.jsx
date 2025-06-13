@@ -37,7 +37,7 @@ function Signup() {
       toast.success(response.data)
       navigate('/home')
     } catch (error) {
-      toast.error(error.response?.data || 'Singup Failed')
+      toast.error(error.response?.data || 'Signup Failed')
     }
   }
 
